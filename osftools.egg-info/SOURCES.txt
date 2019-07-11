@@ -1,0 +1,8 @@
+setup.py
+osftools.egg-info/PKG-INFO
+osftools.egg-info/SOURCES.txt
+osftools.egg-info/dependency_links.txt
+osftools.egg-info/top_level.txt
+src/__init__.py
+src/osf_display.py
+src/osf_interact.py
