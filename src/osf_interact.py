@@ -4,7 +4,7 @@ import requests
 import numpy as np
 import urllib.request
 
-def download_per_page(PROJECT_URL, PROJECT_DIR, DIR_ID=None, ext=None, start_page=-1, end_page=-1):
+def download_per_page(PROJECT_URL, PROJECT_DIR, DIR_ID=None, ext=None, start_page=-1, end_page=-1, verbose='minimal'):
     """
     download_per_page
     """
@@ -19,11 +19,13 @@ def download_per_page(PROJECT_URL, PROJECT_DIR, DIR_ID=None, ext=None, start_pag
             last_page = end_page
     if(start_page > 0):
         first_page = start_page
-    print('About to skim through {0} pages'.format(last_page - first_page + 1))
+    if(verbose != 'mute'):
+    	print('About to skim through {0} pages'.format(last_page - first_page + 1))
     # Let's skim through them
     for ipage in np.arange(first_page, last_page+1):
         names, ids = url_to_idlist(DIR_URL+'/?page='+str(ipage), kind='file', ext=ext)
-        print('Number of hits in page {0}: {1}'.format(ipage, len(ids)))
+        if(verbose == 'maximal'):
+            print('Number of hits in page {0}: {1}'.format(ipage, len(ids)))
         download_files_from_list(PROJECT_URL, PROJECT_DIR, ids, names)
 
 def download_files_from_list(PROJECT_URL, PROJECT_DIR, fileidlist, filenamelist):
